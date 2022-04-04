@@ -1,0 +1,15 @@
+import hid
+
+for device_dict in hid.enumerate():
+    keys = list(device_dict.keys())
+    keys.sort()
+    for key in keys:
+        print("%s : %s" % (key, device_dict[key]))
+    print()
+
+h = hid.device()
+h.open(0x048d, 0xc965)
+
+h.send_feature_report([
+    0xcc, 0x16, 0x01, 0x01, 0x01, 0x05, 0x00, 0x05, 0x05, 0x00, 0x05, 0x05, 0x00, 0x05, 0x05, 0x00, 0x05
+])
